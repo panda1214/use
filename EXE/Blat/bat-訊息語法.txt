@@ -1,0 +1,6 @@
+:L0_EXIT_ERROR
+REM messagebox [title] [text] {flagnr.} Display a messagebox 
+REM TYPE D:\MSG\GG.TXT
+SET M0_ERROR_STR="@@@@@@檢查T30_O40檔案異常_@@@@@@"
+REM start /MIN D:\Msg\messagebox-x64.exe M0_MESSAGE_BOX %M0_ERROR_STR% 0
+echo msgbox %M0_ERROR_STR%,16,"檢查檔案訊息%DATE%-%TIME%">1.vbs && start 1.vbs && ping -n 2 127.1>nul && del 1.vbs

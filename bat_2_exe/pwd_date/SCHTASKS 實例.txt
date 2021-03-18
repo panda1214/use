@@ -1,0 +1,20 @@
+SCHTASKS 實例
+
+建立排程
+SCHTASKS /Create /ST 22:00:00 /SC daily /TN "school-shutdown2200" /TR "shutdown -s -f -t 30"
+於每天 22:00 執行關機指令並命名為 "school-shutdown2200"。
+因為沒有指定以系統執行，只有建立排程的帳號登入時才會執行關機指令。
+SCHTASKS /Create /ST 08:00 /SC ONCE /SD 2017/02/18 /TN School-once-0800 /TR "shutdown -s -f -t 30"
+於 2017/02/18  08:00 執行關機指令一次並命名為 "School-once-0800"。
+查詢排程
+schtasks
+列出所有排程，很長又不容易閱讀。
+schtasks /Query /TN school-shutdown2200
+以排程名稱查詢，不能用萬用字元，要記得排程確實名稱。
+schtasks | find /i "school"
+因為每個我建的排程命名時都有帶 "school" ，所以利用 find 找出我建的所有排程。
+
+ 
+刪除排程
+SCHTASKS /Delete /TN "school-shutdown2200"
+刪除 "school-shutdown2200" 這個排程。

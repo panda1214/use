@@ -1,0 +1,87 @@
+------設定 周六打掃排程-----------
+直接改 BIOS 開機時間為 1945 開機
+----------------------------------
+1: 00:45
+	[換班]D6-0045-自動關機_For_打掃_加_BIOS_1945_AutoBoot
+
+***2: 19:45
+	BIOS 每日 1945 開機 : for 20:00 備份
+
+
+======還原周六打掃排程===========
+直接改 BIOS 開機時間為 0730 開機
+----------------------------------
+*****2021-02-08
+1: 00:45
+	[換班]D6-0045-自動關機_For_打掃_加_BIOS_1945_AutoBoot
+
+
+***2: 07:30
+	BIOS 每日 0730 開機  
+		0740 (1)for [換班] 0740_今日是否上班工作日(依設定日曆檔)
+		0750 (2)1-0750-上班前重開機
+
+==========================================================================
+平日 
+0030_依設定日曆檔_自動設定0830排程
+		D:\Msg\Use\0030-auto_set_duty.bat
+0725 *[BIOS] BIOS_0725_AutoBoot
+
+2-0800-1829-上班期間系統開機後
+		開機後執行 >2-0800-1829-上班期間系統開機後
+		MSG  * 自動開機程式執行中_請勿使用滑鼠或鍵盤
+		D:\Msg\Use\nircmd.exe mutesysvolume 1
+		D:\Msg\Use\start_cmd.vbs D:\Msg\Use\0-logon_User.bat
+		D:\Msg\Mouse_Auto\open_outlook.exe
+		D:\Msg\Mouse_Auto\open_maini_alarm.exe
+		D:\Msg\Mouse_Auto\open_Rainlendar.exe
+		D:\Msg\Use\start_cmd.vbs
+		"C:\Program Files\Rainmeter\Rainmeter.exe"
+		
+1-0750-上班前重開機
+		D:\Msg\Use\start_cmd.vbs  D:\Msg\Use\00_kill_Beforte_Boot.bat
+						taskkill.exe" /F /IM OUTLOOK.EXE /T 
+						taskkill.exe" /F /IM Rainlendar2.exe /T 
+						taskkill.exe" /F /IM Rainmeter.exe /T
+						taskkill.exe" /F /IM notepad++.exe 
+						taskkill.exe" /F /IM ask_Speaker.exe /T
+						taskkill.exe" /F /IM FreeAlarmClock.exe /T 
+						taskkill.exe" /F /IM HYVideoDesktop.exe /T 
+						shutdown /r /t 30 /f /c "F_Reboot_重開機"
+		
+0825-記得簽到
+		D:\Msg\Use\WIN_D.exe
+		MSG * 早班-記得簽到_!!!_早班-記得簽到_!!!
+		D:\Msg\Use\start_cmd.vbs D:\Msg\Use\HR_LOGONOFF.bat
+	
+0900-START_HYVideoDesktop
+		"C:\Program Files (x86)\HYLite\HYVideoDesktop.exe"
+
+1728-1730_D-金控人資簽退
+		MSG * 下班-記得簽退***_!!!下班-記得簽退!!!
+		D:\Msg\Use\WIN_D.exe
+		D:\Msg\Use\start_cmd.vbs D:\Msg\Use\HR_LOGONOFF.bat
+
+3-1825-下班後重開機
+		D:\Msg\Use\nircmd.exe mutesysvolume 1
+		D:\Msg\Use\00-offduty_schedule.bat
+		D:\Msg\Use\00_kill_Beforte_Boot.bat
+		D:\Msg\Use\WIN_D.exe
+		D:\Msg\Use\start_cmd.vbs D:\Msg\Use\F_Reboot.bat
+		
+4-1830-0755-下班-系統開機後
+		D:\Msg\Use\nircmd.exe mutesysvolume 1
+		D:\Msg\Use\start_cmd.vbs D:\Msg\Use\00-offduty-After_Boot.bat
+
+*[\Microsoft\Windows\WindowsBackup] WIndows  系統 -每周六 2000 執行系統硬碟備份
+2000-2024
+	D:\Msg\Use\start_cmd.vbs D:\Msg\Use\0600-ck_HardDisk_Space.bat
+	%systemroot%\system32\rundll32.exe /d sdengin2.dll,ExecuteScheduledBackup
+	D:\Msg\Use\start_cmd.vbs D:\Msg\Use\0600-ck_HardDisk_Space.bat
+	
+*[obian Backup] 每日_2100備份原始程式 Cobian Backup 11 Gravity  
+2100-2137 完整總備份時間：0 小時， 37 分鐘，46 秒
+
+[換班] 2300-ck_HardDisk_Space
+2200-2205  		D:\Msg\Use\start_cmd.vbs D:\Msg\Use\0600-ck_HardDisk_Space.bat
+	
