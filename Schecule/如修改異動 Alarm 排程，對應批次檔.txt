@@ -1,0 +1,8 @@
+如修改異動 Alarm 排程，對應批次檔
+=================================
+
+00-offduty_schedule.bat
+
+00-onduty_schedule.bat
+
+0030-auto_set_duty.bat

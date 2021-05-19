@@ -577,6 +577,7 @@ echo. >> %M0_LOG%
 echo. :::  ===============QUERY set Up Alarm ON Schedule======================= 	>> %M0_LOG%   
 schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M0_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-0840"										>> %M0_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-0900"										>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-1030"										>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-1530"										>> %M0_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-1715"										>> %M0_LOG%
@@ -613,6 +614,7 @@ echo. :::  >> %M1_LOG%
 echo. :::  ===============Set Up Off Alarm Schedule======================= 			>> %M0_LOG%   
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-0825"										>> %M0_LOG%    
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-0840"										>> %M0_LOG% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-0900"										>> %M0_LOG% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1030"										>> %M0_LOG%
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1530"										>> %M0_LOG% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1715"										>> %M0_LOG%    
