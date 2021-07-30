@@ -89,8 +89,9 @@ REM !!!####20190121######
 	SET M1_LOGDIR=%M1_RUNDIR%\LOG
 	SET M1_SETDIR=\Msg\Use
 	SET M1_SENDMSG_1=%M1_SETDIR%\send_msg1_panda.bat
-	SET M1_SENDMSG_2=%M1_SETDIR%\NO_send_msg2_panda.bat
+	SET M1_SENDMSG_2=%M1_SETDIR%\send_msg2_panda.bat
 	SET M1_SENDMSG_3=%M1_SETDIR%\NO_send_msg3_panda.bat
+	
 
 
 :L1_CK_DIR00	

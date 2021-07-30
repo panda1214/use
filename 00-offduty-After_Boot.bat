@@ -89,6 +89,9 @@ tasklist.exe /FI "IMAGENAME eq FreeAlarmClock.exe"		>> %M0_LOG%
 tasklist.exe /FI "IMAGENAME eq HYVideoDesktop.exe"		>> %M0_LOG%
 tasklist.exe /FI "IMAGENAME eq Rainlendar2.exe"			>> %M0_LOG%
 tasklist.exe /FI "IMAGENAME eq Rainmeter.exe"			>> %M0_LOG%
+tasklist.exe /FI "IMAGENAME eq lync.exe"				>> %M0_LOG%
+tasklist.exe /FI "IMAGENAME eq caffeine64.exe"			>> %M0_LOG%
+
 
 "C:\WINDOWS\system32\taskkill.exe" /F /IM OUTLOOK.EXE /T 			>> %M0_LOG%
 "C:\WINDOWS\system32\taskkill.exe" /F /IM ask_Speaker.exe /T 		>> %M0_LOG%
@@ -96,6 +99,8 @@ tasklist.exe /FI "IMAGENAME eq Rainmeter.exe"			>> %M0_LOG%
 "C:\WINDOWS\system32\taskkill.exe" /F /IM HYVideoDesktop.exe /T 	>> %M0_LOG%
 "C:\WINDOWS\system32\taskkill.exe" /F /IM Rainlendar2.exe /T 	>> %M0_LOG%
 "C:\WINDOWS\system32\taskkill.exe" /F /IM Rainmeter.exe /T 	>> %M0_LOG%
+"C:\WINDOWS\system32\taskkill.exe" /F /IM lync.exe /T 	>> %M0_LOG%
+"C:\WINDOWS\system32\taskkill.exe" /F /IM caffeine64.exe /T 	>> %M0_LOG%
 echo. ================================	>> %M0_LOG%
 echo. >> %M0_LOG%
 GOTO L0_TASK_KILL_COUNT
@@ -105,10 +110,10 @@ GOTO L0_EXIT
 
 :L0_TASK_KILL_COUNT
 IF %M1_KILL_COUNT% GTR 2 GOTO L0_EXIT
-::REM msg_str_sec_bye.eee '等待900秒繼續執行_%M1_KILL_COUNT%_00-offduty-After_Boot.bat' 900
 TIMEOUT /t 900
-SET /A M1_KILL_COUNT=M1_KILL_COUNT+1
 
+
+SET /A M1_KILL_COUNT=M1_KILL_COUNT+1
 GOTO L0_TASK_KILL_01
 GOTO L0_EXIT
 
@@ -133,7 +138,7 @@ echo. *****************************************************	>> %M0_LOG%
 echo Bye!!! Bye!!!
 ::msg_str_sec_bye.eee '完成%M1_KILL_COUNT%_00-offduty-After_Boot.bat' 3
 MSG * /TIME:3 完成%M1_KILL_COUNT%_00-offduty-After_Boot.bat
-::TIMEOUT /T 3600
+::DEBUG TIMEOUT /T 3600
 EXIT
 
 

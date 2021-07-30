@@ -1,8 +1,11 @@
 @echo off
+nircmd cmdwait 1000 win setsize ititle "cmd.exe" 3600 3600 100 200
+mode con cols=20 lines=10
 GOTO L0_start_Admin
 :L0_start_Admin01
 REM *************************************
 REM 20200817 董國安 ck_HardDisk_Space 檢查 自己PC硬碟空間 
+REM 2021-0519 Update  C,D,E,F CSV 加產生日期
 REM ************************************
 
 REM 底下為IFTTT轉Line金鑰
@@ -195,10 +198,12 @@ echo. %M0_SPACE%
 echo. %M0_MASTER_DRIVE_FREE%
 echo. 檢查PC硬碟_最主要監控磁碟空間_%M0_MASTER_Drive%_%M0_MASTER_DRIVE_FREE% 	>> %M0_LOG%
 SET M0_DSIK_LOG_STR=%x%/%y%/%z%,%M0_TAG_Drive%,%M0_SPACE%
-echo. %M0_TAG_Drive%,可用的未使用位元組總數 ,%M0_SPACE% 						>> %M0_LOG_F%
+echo. %M0_TAG_Drive%,%x%/%y%/%z%,可用的未使用位元組總數 ,%M0_SPACE% 			>> %M0_LOG_F%
 echo. **************************************************						>> %M0_LOG%
 ::PAUSE
+GOTO L0_CHECK_Drive_D
 
+:L0_CHECK_Drive_E
 set M0_TAG_Drive=E:
 IF NOT EXIST %M0_TAG_Drive% GOTO L0_EXIT_ERROR
 echo. >> %M0_LOG%
@@ -215,10 +220,11 @@ for /f "usebackq tokens=1-4 delims= " %%i IN (`FIND "可用的未使用位元組總數" "%M
 	)
 	
 SET M0_DSIK_LOG_STR=%M0_DSIK_LOG_STR%,%M0_TAG_Drive%,%M0_SPACE%		
-echo. %M0_TAG_Drive%,可用的未使用位元組總數 ,%M0_SPACE% 	>> %M0_LOG_E%
+echo. %M0_TAG_Drive%,%x%/%y%/%z%,可用的未使用位元組總數 ,%M0_SPACE% 	>> %M0_LOG_E%
 echo. **************************************************	>> %M0_LOG%
 echo. >> %M0_LOG%
 
+:L0_CHECK_Drive_D
 set M0_TAG_Drive=D:
 IF NOT EXIST %M0_TAG_Drive% GOTO L0_EXIT_ERROR
 echo. >> %M0_LOG%
@@ -235,7 +241,7 @@ for /f "usebackq tokens=1-4 delims= " %%i IN (`FIND "可用的未使用位元組總數" "%M
 	)
 	
 SET M0_DSIK_LOG_STR=%M0_DSIK_LOG_STR%,%M0_TAG_Drive%,%M0_SPACE%	
-echo. %M0_TAG_Drive%,可用的未使用位元組總數 ,%M0_SPACE% 	>> %M0_LOG_D%
+echo. %M0_TAG_Drive%,%x%/%y%/%z%,可用的未使用位元組總數 ,%M0_SPACE% 	>> %M0_LOG_D%
 echo. **************************************************	>> %M0_LOG%
 echo. >> %M0_LOG%
 
@@ -255,10 +261,10 @@ for /f "usebackq tokens=1-4 delims= " %%i IN (`FIND "可用的未使用位元組總數" "%M
 	)
 	
 SET M0_DSIK_LOG_STR=%M0_DSIK_LOG_STR%,%M0_TAG_Drive%,%M0_SPACE%
-echo. %M0_TAG_Drive%,可用的未使用位元組總數 ,%M0_SPACE% 	>> %M0_LOG_C%
+echo. %M0_TAG_Drive%,%x%/%y%/%z%,可用的未使用位元組總數 ,%M0_SPACE% 	>> %M0_LOG_C%
 echo. **************************************************	>> %M0_LOG%
 
-tiemout /t 3600
+::timeout /t 30
 echo. >> %M0_LOG%
 echo. >> %M0_LOG%
 echo. **************************************************	>> %M0_LOG%

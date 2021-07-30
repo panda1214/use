@@ -1,5 +1,5 @@
 ::::::::::::::::::::::::::::
-REM FOR use	3-1755-下班後重開機
+REM FOR use	1730-次日
 REM 
 REM 切換至 	2-0730-1759-上班期間系統開機後 OFF
 REM 		4-1800-0724-下班-系統開機後 ON
@@ -54,54 +54,62 @@ echo. :::  "3-1825-下班後重開機 run D:\Msg\Use\00-offduty_schedule.bat"  			>> %
 echo. :::  ============================================================= 			>> %M0_LOG%
 echo. :::  ============================================================= 			>> %M0_LOG%  
 echo. :::  -----------     every thing  off-----------3,4,5 on	-----------			>> %M0_LOG% 
-schtasks /CHANGE /DISABLE /TN "\0830_班\0825-記得簽到"								>> %M0_LOG%    
-schtasks /CHANGE /DISABLE /TN "\0830_班\0900-START_HYVideoDesktop"					>> %M0_LOG% 
 schtasks /CHANGE /DISABLE /TN "\0830_班\1-0750-上班前重開機"						>> %M0_LOG% 
-schtasks /CHANGE /DISABLE /TN "\0830_班\1630-W-每周五_檢查備份硬碟已備妥至抽取盒"	>> %M0_LOG%
-schtasks /CHANGE /DISABLE /TN "\0830_班\1728-1730_D-金控人資簽退"					>> %M0_LOG%  
 schtasks /CHANGE /DISABLE /TN "\0830_班\2-0800-1829-上班期間系統開機後"				>> %M0_LOG% 
-echo. ::: "0830_班\3-1825-下班後重開機 永遠 ON"										>> %M0_LOG% 
 echo. :::  ----------- 3 Always ON------------	---------------------				>> %M0_LOG%  
 schtasks /CHANGE /ENABLE  /TN "\0830_班\3-1825-下班後重開機"						>> %M0_LOG% 
 echo. :::  ----------- 3,4, 5 on	------------	---------------------			>> %M0_LOG%  
 schtasks /CHANGE /ENABLE /TN "\0830_班\4-1830-0755-下班-系統開機後"					>> %M0_LOG% 
 schtasks /CHANGE /ENABLE /TN "\0830_班\5-休假期間_0755_重開機"						>> %M0_LOG% 
-echo. :::  ============================================================= 			>> %M0_LOG% 
+echo. :::  20210610 ADD------- WFH 1,2,3,4,5 OFF	----------------------			>> %M0_LOG% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M0_LOG% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\1-0750-上班前重開機"						>> %M0_LOG%  
+schtasks /CHANGE /DISABLE /TN "\0830_班\2-0800-1829-上班期間系統開機後"				>> %M0_LOG% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\3-1825-下班後重開機"						>> %M0_LOG% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\4-1830-0755-下班-系統開機後"				>> %M0_LOG% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\5-休假期間_0755_重開機"						>> %M0_LOG% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\99-0740-居家工作-上班期間-執行上班排程"		>> %M0_LOG% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\99-1830-居家工作-執行下班後關閉排程機"		>> %M0_LOG% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M0_LOG% 
+echo. :::  ==============================================================			>> %M0_LOG% 
 echo. :::  >> %M0_LOG%  
 echo. :::  >> %M0_LOG% 
 echo. :::  ==========查詢目前狀態======================================== 			>> %M0_LOG% 
 echo. :::  -----------     every thing  off-----------3,4,5 on	-----------			>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\0830_班\0825-記得簽到"							>> %M0_LOG%    
-schtasks /query /fo csv /nh /TN "\0830_班\0900-START_HYVideoDesktop"				>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\0830_班\1-0750-上班前重開機"						>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\0830_班\1630-W-每周五_檢查備份硬碟已備妥至抽取盒"	>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\0830_班\1728-1730_D-金控人資簽退"					>> %M0_LOG%  
 schtasks /query /fo csv /nh /TN "\0830_班\2-0800-1829-上班期間系統開機後"			>> %M0_LOG%  
 echo. :::  ----------- 3,4, 5 on	------------	---------------------			>> %M0_LOG%  
 schtasks /query /fo csv /nh /TN "\0830_班\3-1825-下班後重開機"						>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\0830_班\4-1830-0755-下班-系統開機後"				>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\0830_班\5-休假期間_0755_重開機"					>> %M0_LOG% 
+echo. :::  20210610 ADD------- WFH 1,2,3,4,5 OFF	----------------------			>> %M0_LOG% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M0_LOG% 
+schtasks /query /fo csv /nh /TN "\0830_班\99-0740-居家工作-上班期間-執行上班排程"	>> %M0_LOG% 
+schtasks /query /fo csv /nh /TN "\0830_班\99-1830-居家工作-執行下班後關閉排程機"	>> %M0_LOG% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M0_LOG% 
 echo. :::  ============================================================== 			>> %M0_LOG% 
 echo. >> %M0_LOG% 
 echo. >> %M0_LOG% 
- echo. :::  ===============Set Up Off Alarm Schedule======================= 			>> %M0_LOG%   
-schtasks /CHANGE /DISABLE /TN "\Alarm\D-0825"										>> %M0_LOG%    
+echo. :::  ===============Set Up Off Alarm Schedule======================= 			>> %M0_LOG%   
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-0825"										>> %M0_LOG% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-0840"										>> %M0_LOG% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-0900"										>> %M0_LOG% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1030"										>> %M0_LOG%
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1530"										>> %M0_LOG% 
-schtasks /CHANGE /DISABLE /TN "\Alarm\D-1715"										>> %M0_LOG%    
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-1715"										>> %M0_LOG% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-1730"										>> %M0_LOG%      
 schtasks /CHANGE /DISABLE /TN "\Alarm\T-1630"										>> %M0_LOG% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\W3-1555"										>> %M0_LOG%    
 schtasks /CHANGE /DISABLE /TN "\Alarm\W5-1555"										>> %M0_LOG%
 echo. :::  ==========查詢目前狀態======================================== 			>> %M0_LOG% 
 echo. :::  -----------     every thing  off-----------3,4,5 on	-----------			>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M0_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-0840"										>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-0900"										>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-1030"										>> %M0_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-1530"										>> %M0_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-1715"										>> %M0_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-1730"										>> %M0_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\T-1630"										>> %M0_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\W3-1555"									>> %M0_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\W5-1555"									>> %M0_LOG%  
@@ -114,7 +122,8 @@ REM start /max C:\Windows\System32\taskschd.msc
 ::SENDMAG
 ::::::::::::::::::::::::::::
 
-SET M0_MSG_CHT_STR="%date%"-"%time%"_1825執行排程00-Offduty_schedule_OK[當日休假執行啟動排程成功][其他 OFF - 3,4,5 ON]
+SET M0_MSG_CHT_STR="%date%-%time%-[執行排程00-Offduty_schedule_OK]-[當日休假執行啟動排程成功][其他 OFF_3,4,5 ON]"
+
 
 :L0_SENDMSG1 
 :: sendMail
@@ -210,39 +219,4 @@ if '%1'=='ELEV' (del "%vbsGetPrivileges%" 1>nul 2>nul  &  shift /1)
 ENDLOCAL 
 
 GOTO L0_END_GET_ADMIN
-
-::[Bat To Exe Converter]
-::
-::YAwzoRdxOk+EWAjk
-::fBw5plQjdCuDJHaR4E4/JxBoZQeNMleFCLAI6+78oeOErS0=
-::YAwzuBVtJxjWCl3EqQJgSA==
-::ZR4luwNxJguZRRnk
-::Yhs/ulQjdF+5
-::cxAkpRVqdFKZSzk=
-::cBs/ulQjdF+5
-::ZR41oxFsdFKZSDk=
-::eBoioBt6dFKZSDk=
-::cRo6pxp7LAbNWATEpCI=
-::egkzugNsPRvcWATEpCI=
-::dAsiuh18IRvcCxnZtBJQ
-::cRYluBh/LU+EWAnk
-::YxY4rhs+aU+JeA==
-::cxY6rQJ7JhzQF1fEqQJQ
-::ZQ05rAF9IBncCkqN+0xwdVs0
-::ZQ05rAF9IAHYFVzEqQJQ
-::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
-::fBEirQZwNQPfEVWB+kM9LVsJDGQ=
-::cRolqwZ3JBvQF1fEqQJQ
-::dhA7uBVwLU+EWDk=
-::YQ03rBFzNR3SWATElA==
-::dhAmsQZ3MwfNWATElA==
-::ZQ0/vhVqMQ3MEVWAtB9wSA==
-::Zg8zqx1/OA3MEVWAtB9wSA==
-::dhA7pRFwIByZRRnk
-::Zh4grVQjdCuDJHSX834FOx5oaTynAEm1CaEz28X+4f+4gUUSXeE6MKzT27qJJd882QzYdp4s2H1lt/hCCQNdHg==
-::YB416Ek+ZG8=
-::
-::
-::978f952a14a936cc963da21a135fa983
-::@echo off
 

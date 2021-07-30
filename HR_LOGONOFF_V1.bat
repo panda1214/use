@@ -1,4 +1,10 @@
 @echo off
+::: schedule 
+::: %windir%\system32\mshta.exe
+::: vbscript:createobject("wscript.shell").run("D:\Msg\use\HR_LOGONOFF_V1.bat",0)(window.close)
+nircmd cmdwait 1000 win setsize ititle "cmd.exe" 3600 3600 100 200
+mode con cols=20 lines=10
+
 REM :: 顯示訊息,並設定60秒自動結束
 REM :: 
 REM :: 
@@ -11,7 +17,9 @@ D:
 SET M0_RUNDIR=\Msg\Use
 CD %M0_RUNDIR%
 IF NOT EXIST %M0_RUNDIR% GOTO L0_CK_FILE_ERR01
-IF NOT EXIST %M0_RUNDIR%\msg_str_sec_bye.eee GOTO  L0_CK_FILE_ERR02
+::IF NOT EXIST %M0_RUNDIR%\msg_str_sec_bye.eee GOTO  L0_CK_FILE_ERR02
+:: 改用 ::msg /time:360 "%username%" message
+::msg /time:360 "%username%" 找不到  %M0_RUNDIR% 目錄 ，請把 nircmd.exe msg_str_sec_bye.eee 放入該目錄 %M0_RUNDIR%
 
 
 @echo off
@@ -56,7 +64,7 @@ GOTO  L0_EXIT
 
 :L0_YES
 	:: "C:\Program Files\Internet Explorer\iexplore.exe" https://go.linyuan.com.tw/FKWeb/
-	start /max "C:\Program Files\Internet Explorer\iexplore.exe" https://go.linyuan.com.tw/FKWeb/
+	start /max "C:\Program Files (x86)\Google\Chrome\Application\chrome_proxy.exe" https://w3.cathaylife.com.tw/eai/ZPWeb/login.jsp
 	::CALL D:\Msg\Use\Log_ID_pass.exe
 	goto L0_EXIT
 
@@ -66,9 +74,8 @@ GOTO  L0_EXIT
 	goto L0_start_01
 	
 :L0_EXIT
-echo Bye! Bye!
-
-timeout /t 3
+mode con cols=150 lines=40
+nircmd cmdwait 1000 win setsize ititle "cmd.exe" 30 30 1000 600
 EXIT
 
 EXIT
@@ -76,9 +83,9 @@ REM :: :::::::::::::::::::::::::::::::::::::::::::::::::::
 REM :: 	SUB FUNCTION
 REM :: :::::::::::::::::::::::::::::::::::::::::::::::::::
 :L0_CK_FILE_ERR01
-	echo  找不到  %M0_RUNDIR% 目錄 ，請把 nircmd.exe msg_str_sec_bye.eee 放入該目錄 %M0_RUNDIR%
-
-	TIMEOUT /T 36000
+	:::echo  找不到  %M0_RUNDIR% 目錄 ，請把 nircmd.exe msg_str_sec_bye.eee 放入該目錄 %M0_RUNDIR%
+	msg /time:360 "%username%" 找不到  %M0_RUNDIR% 目錄 ，請把 nircmd.exe msg_str_sec_bye.eee 放入該目錄 %M0_RUNDIR%
+	:::TIMEOUT /T 36000
 GOTO L0_EXIT
 :L0_CK_FILE_ERR02
 	echo  找不到  %M0_RUNDIR%\msg_str_sec_bye.eee 檔案 ，請把 msg_str_sec_bye.eee 放入該目錄

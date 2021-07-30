@@ -43,7 +43,7 @@ blat276 -bodyF %M0_eLOG_BODY% %M0_eTO% %M0_eSUBJ% %M0_eFM% %M0_eSVR% %M0_eUSER% 
 goto L0__EXIT
 
 :L0__EXIT
-:: timeout /t 600
+:::timeout /t 600
 
 ::::
 REM cmail.exe %M0_host% %M0_to% %M0_from% %M0_subj% %M0_LOG%

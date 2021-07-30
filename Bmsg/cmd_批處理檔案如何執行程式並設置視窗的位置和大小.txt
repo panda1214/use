@@ -1,0 +1,23 @@
+cmd:批處理檔案如何執行程式並設置視窗的位置和大小？
+
+nircmd win move ititle "cmd.exe" 5 5 10 10
+
+     nircmd win setsize ititle "cmd.exe" 30 30 100 200
+
+     nircmd cmdwait 1000 win setsize ititle "cmd.exe" 30 30 1000 600
+	
+:::::::::::::::::	
+mode con cols=150 lines=40
+
+
+:::::::::::::::::::::
+	 @echo off
+if “%1〃==”h” goto begin
+start mshta vbscript:createobject(“wscript.shell”).run(“””%~nx0〃” h”,0)(window.close)&&exit
+:begin
+::以下為正常批處理命令，不可含有pause set/p等互動命令
+
+::::::::::::::::::::::::::::::::::::::::::
+HideRun.vbs
+CreateObject(“WScript.Shell”).Run “cmd /c D:/test.bat”,0
+:::其中D:/test.bat是你的批處理路徑

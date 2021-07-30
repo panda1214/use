@@ -111,7 +111,8 @@ if exist  %M1_SETDIR% GOTO L1_MKDIREND
 :L1_CREAT_SET_LOG_FILE
 REM !!!####20190123######
 SET M1_LOG_HEAD=%M1_LOGDIR%\0030-AUTO_SET_DUTY_LOG_HEAD.txt
-     SET M1_LOG=%M1_LOGDIR%\0030-AUTO_SET_DUTY_RUNLOG.txt
+SET M1_LOG=%M1_LOGDIR%\0030-AUTO_SET_DUTY_RUNLOG.txt
+SET M1_LOG_WORK=%M1_LOGDIR%\0030-AUTO_SET_DUTY_RUNLOG_WORK.txt
 REM 將 LOG 寫在前面 ***2019/01/21
 SET M1_Swap_TMP=%M1_LOGDIR%\0030-AUTO_SET_DUTY_LOG_TMP.txt
 REM 每次離開時把M1_LOG 存至 M1_Swap_TMP
@@ -133,6 +134,7 @@ REM %M1_MSGDSP_EXE% 執行0030_auto_set_duty.bat 5
 ::REM 起始 LOG File & empty log file
 echo. > %M1_LOG_HEAD%
 echo. > %M1_LOG%
+echo. > %M1_LOG_WORK%
 SET M0_LOG=%M1_LOG%
 ::REM M1_LOG use in send mesg file name (mail attach file)
 echo. > %M1_Swap_TMP%
@@ -151,7 +153,7 @@ echo. **************************************************	>> %M1_LOG_HEAD%
 :L1_CHECK_STEP01
 REM *************************************************************************************************
 REM SUB FUNC :L1_CHECK_STEP01
-echo Process...Step 1 : 找出 %M1_TODAY% 是否存在 %M1_TAG_WRK_FIL1% 為補上班工作日 		>> %M1_LOG%
+echo Process...Step 1 : 找出 %M1_TODAY% 是否存在 %M1_TAG_WRK_FIL1% 為補上班工作日 		>> %M1_LOG_WORK%
 echo Process...Step 1 : 找出 %M1_TODAY% 是否存在 %M1_TAG_WRK_FIL1% 為補上班工作日
 REM *************************************************************************************************
 SET M1_MSG_CHT_STR="[檢查中]_STEP01-找出 %M1_TODAY% 是否存在 %M1_TAG_WRK_FIL1% 用以判別補上班工作日-[FM-%M1_SENDIP%]"
@@ -180,9 +182,9 @@ IF %M1_FIND_DATE% NEQ %x%%y%%z% GOTO L1_STEP01_NO
 set M1_FIND_WRK_DATE=%M1_i%
 set M1_WORK_YN=10
 set M1_MSG_CHT_STR="[檢查完成]_(%M1_TODAY%)是補上班工作日 ，找到設定檔_%M1_TAG_WRK_FIL1%-%M1_FIND_DATE%-[FM-%M1_SENDIP%]"
-echo END.....Process...Step 1 : 已找出 %M1_TODAY% 存在 %M1_TAG_WRK_FIL1% 為補上班工作日						>> %M1_LOG%
-echo. >> %M1_LOG%
-echo. >> %M1_LOG%
+echo END.....Process...Step 1 : 已找出 %M1_TODAY% 存在 %M1_TAG_WRK_FIL1% 為補上班工作日						>> %M1_LOG_WORK%
+echo. >> %M1_LOG_WORK%
+echo. >> %M1_LOG_WORK%
 GOTO L1_ONDUTY
 ::(1) workday.dat	-> 有 -> 上班->    RUN SUB FUNC L1_ONDUTY
 ::GOTO L1_CHECK_STEP_END
@@ -191,7 +193,7 @@ GOTO L1_ONDUTY
 set M1_FIND_WRK_DATE=(未找到)
 set M1_WORK_YN=11
 SET M1_MSG_CHT_STR="[檢查中]_STEP02-%M1_TAG_HOL_FIL1% 找出 %M1_TODAY% 有無設定今日補休假日-[FM-%M1_SENDIP%]"	
-echo END.....Process...Step 1 :未找到 %M1_TODAY% 存在 %M1_TAG_WRK_FIL1% 為補上班工作日,進入Step 2檢查.		>> %M1_LOG%
+echo END.....Process...Step 1 :未找到 %M1_TODAY% 存在 %M1_TAG_WRK_FIL1% 為補上班工作日,進入Step 2檢查.		>> %M1_LOG_WORK%
 REM M1_WORK_YN=2  SUN FUNC fail 今日日期上班工作日 goto step 2
 
 GOTO L1_CHECK_STEP02
@@ -209,9 +211,9 @@ REM ****************************************************************************
 REM : 找出    周6,日 有無在 holiday.dat 如有代表今日為非周6周日之補休假日
 REM :: SUB FUNC L1_CHECK_STEP02
 SET M1_MSG_CHT_STR="[檢查中]_STEP02-%M1_TAG_HOL_FIL1% 找出 %M1_TODAY% 有無設定今日補休假日-[FM-%M1_SENDIP%]"	
-echo. >> %M1_LOG%
-echo. >> %M1_LOG%
-echo Process...Step 2 : %M1_TAG_HOL_FIL1% 找出 %M1_TODAY% 有無設定今日補休假日,進入Step 2檢查....		>> %M1_LOG%
+echo. >> %M1_LOG_WORK%
+echo. >> %M1_LOG_WORK%
+echo Process...Step 2 : %M1_TAG_HOL_FIL1% 找出 %M1_TODAY% 有無設定今日補休假日,進入Step 2檢查....		>> %M1_LOG_WORK%
 echo Process...Step 2 : %M1_TAG_HOL_FIL1% 找出 %M1_TODAY% 有無設定今日補休假日,進入Step 2檢查....
 REM *************************************************************************************************
 set M1_FIND_DATE=%x%%y%%z%
@@ -249,7 +251,7 @@ GOTO L1_OFFDUTY
 :L1_STEP02_NOFIND 
 set M1_FIND_HOL_DATE=(未找到)
 set M1_WORK_YN=21
-echo END.....Process...Step 2 :  %M1_TODAY% 不存在 %M1_TAG_HOL_FIL1% ,進入STEP 3檢查今日是為周幾?	>> %M1_LOG%
+echo END.....Process...Step 2 :  %M1_TODAY% 不存在 %M1_TAG_HOL_FIL1% ,進入STEP 3檢查今日是為周幾?	>> %M1_LOG_WORK%
 
 GOTO L1_CHECK_STEP03
 
@@ -260,14 +262,14 @@ REM ****************************************************************************
 
 :L1_CHECK_STEP03
 
-echo. >> %M1_LOG%
-echo. >> %M1_LOG%
+echo. >> %M1_LOG_WORK%  
+echo. >> %M1_LOG_WORK%  
 REM *************************************************************************************************
 REM :: SUB FUNC :L1_CHECK_STEP03
 REM :: (2) 檢查今日是否為 周六或周日 ,    如有代表今日為勞工(一般)例假日
 REM :: 取得今日為週 ?
 SET M1_MSG_CHT_STR="[檢查中]_STEP03-找出 %M1_TODAY% 是否為 周六或周日,如有代表今日為勞工(一般)例假日-[FM-%M1_SENDIP%]"  
-echo Process...Step 3 : 找出 %M1_TODAY% 是否為 周六或周日,如有代表今日為勞工(一般)例假日	>> %M1_LOG%
+echo Process...Step 3 : 找出 %M1_TODAY% 是否為 周六或周日,如有代表今日為勞工(一般)例假日	>> %M1_LOG_WORK%
 echo Process...Step 3 : 找出 %M1_TODAY% 是否為 周六或周日,如有代表今日為勞工(一般)例假日
 REM *************************************************************************************************
 set M1_FIND_DATE=%x%%y%%z%
@@ -308,10 +310,10 @@ set M1_FIND_DATE=%M1_TODAY%_%M1_WEEK_D%
 set M1_WORK_YN=30
 set M1_FIND_DATE=%M1_TODAY%
 SET M1_MSG_CHT_STR="[檢查完成]_檢查日期( %M1_TODAY%-%M1_WEEK_D%),確認為(一般)休假日-[FM-%M1_SENDIP%]"
-echo END....Process...Step 2 :  檢查日期(%M1_TODAY%_%M1_WEEK_D%),確認為(一般)休假日	>> %M1_LOG%
-echo END....Process...Step 2 :  檢查日期(%M1_TODAY%_%M1_WEEK_D%),確認為(一般)休假日	
-echo. >> %M1_LOG%
-echo. >> %M1_LOG%				
+echo END....Process...Step 3 :  檢查日期(%M1_TODAY%_%M1_WEEK_D%),確認為(一般)休假日	>> %M1_LOG_WORK%
+echo END....Process...Step 3 :  檢查日期(%M1_TODAY%_%M1_WEEK_D%),確認為(一般)休假日	
+echo. >> %M1_LOG_WORK%
+echo. >> %M1_LOG_WORK%			
 :: REM 週六,週日(一般)休假日
 GOTO L1_OFFDUTY
 :: (3) 	周6-周7    	-> 是 -> 例假->    RUN SUB FUNC L1_OFFDUTY
@@ -335,10 +337,10 @@ set M1_FIND_DATE=%M1_TODAY%_%M1_WEEK_D%
 set M1_WORK_YN=30
 set M1_FIND_DATE=%M1_TODAY%
 SET M1_MSG_CHT_STR="[檢查完成]_檢查日期(%M1_TODAY%_%M1_WEEK_D%)為平日工作日,確認要上班-[FM-%M1_SENDIP%]"
-echo END....Process...Step 3 : 檢查日期(%M1_TODAY%_%M1_WEEK_D%)為平日工作日,確認要上班	>> %M1_LOG%
+echo END....Process...Step 3 : 檢查日期(%M1_TODAY%_%M1_WEEK_D%)為平日工作日,確認要上班	>> %M1_LOG_WORK%
 echo END....Process...Step 3 : 檢查日期(%M1_TODAY%_%M1_WEEK_D%)為平日工作日,確認要上班
-echo. >> %M1_LOG%
-echo. >> %M1_LOG%
+echo. >> %M1_LOG_WORK%
+echo. >> %M1_LOG_WORK%
 ::REM IF %%i 1-5 GOTO  L1_CHECK_STEP02
 GOTO L1_ONDUTY
 :: (3) 	周1-周5    	-> 是 -> 上班->    RUN SUB FUNC L1_ONDUTY
@@ -365,32 +367,32 @@ GOTO L1_SENDMSG1
 
 
 :L1_CHECK_STEP_END
-echo. >> %M1_LOG%
-echo. >> %M1_LOG%
-echo. ***********************************************************************************************	>> %M1_LOG%
-echo. ***********************************************************************************************   >> %M1_LOG%
-echo Process...CHECK_STEP_END		>> %M1_LOG%
+echo. >> %M1_LOG_WORK%
+echo. >> %M1_LOG_WORK%
+echo. ***********************************************************************************************	 >> %M1_LOG_WORK%
+echo. ***********************************************************************************************   >> %M1_LOG_WORK%
+echo Process...CHECK_STEP_END		>> %M1_LOG_WORK%
 echo Process...CHECK_STEP_END
 
-echo 今日日期為(M1_TODAY)	%M1_TODAY%											>> %M1_LOG%
-echo.-----------------------------------------------------------------------	>> %M1_LOG%
-echo 今日日期(%M1_TODAY%)是否為工作日(M1_WORK_YN)%M1_WORK_YN%					>> %M1_LOG%
-echo 10[ step1 ok FIND IN(%M1_TAG_WRK_FIL1%) 11(step1 Fail GOTO step 2 check) ]	>> %M1_LOG%
-echo 20[ step1 ok FIND IN(%M1_TAG_HOL_FIL1%) 21(step2 Fail GOTO step 3 check) ]	>> %M1_LOG%
-echo 30[ step3 OK  DAY67 OR DAY15) 31(step3 Fail  SYSTEM ERROR)				  ]	>> %M1_LOG%
-echo.-----------------------------------------------------------------------	>> %M1_LOG%
-echo 找到工作設定檔 (%M1_TAG_WRK_FIL1%) 其補上班日為 %M1_FIND_WRK_DATE%	>> %M1_LOG%
-echo 找到假日設定檔 (%M1_TAG_HOL_FIL1%) 其補休假日為 %M1_FIND_HOL_DATE%	>> %M1_LOG%
+echo 今日日期為(M1_TODAY)	%M1_TODAY%											>> %M1_LOG_WORK%
+echo.-----------------------------------------------------------------------	>> %M1_LOG_WORK%
+echo 今日日期(%M1_TODAY%)是否為工作日(M1_WORK_YN)%M1_WORK_YN%					>> %M1_LOG_WORK%
+echo 10[ step1 ok FIND IN(%M1_TAG_WRK_FIL1%) 11(step1 Fail GOTO step 2 check) ]	>> %M1_LOG_WORK%
+echo 20[ step1 ok FIND IN(%M1_TAG_HOL_FIL1%)  21(step2 Fail GOTO step 3 check)]	>> %M1_LOG_WORK%
+echo 30[ step3 OK  DAY67 OR DAY15) 31(step3 Fail  SYSTEM ERROR)				 ]	>> %M1_LOG_WORK%
+echo.-----------------------------------------------------------------------	>> %M1_LOG_WORK%
+echo 找到工作設定檔 (%M1_TAG_WRK_FIL1%) 其補上班日為 %M1_FIND_WRK_DATE%	>> %M1_LOG_WORK%
+echo 找到假日設定檔 (%M1_TAG_HOL_FIL1%) 其補休假日為 %M1_FIND_HOL_DATE%	>> %M1_LOG_WORK%
 
 
 
 
-echo. >> %M1_LOG%
-echo. >> %M1_LOG%
-echo. **************************************************	>> %M1_LOG%
-echo. 程式名稱 0030-auto_set_duty.bat							>> %M1_LOG%
-echo. 程式完成時間  %M1_SYSTEM_DATE%, %time%  				>> %M1_LOG%
-echo. **************************************************	>> %M1_LOG%
+echo. >> %M1_LOG_WORK%
+echo. >> %M1_LOG_WORK%
+echo. **************************************************	>> %M1_LOG_WORK%
+echo. 程式名稱 0030-auto_set_duty.bat						>> %M1_LOG_WORK%
+echo. 程式完成時間  %M1_SYSTEM_DATE%, %time%  				>> %M1_LOG_WORK%
+echo. **************************************************	>> %M1_LOG_WORK%
 GOTO L1_EXIT_OK
 
 :L1_EXIT_OK
@@ -407,10 +409,11 @@ GOTO L1_SENDMSG1
 :L1_SENDMSG1
 REM 將 LOG 寫在前面 ***2019/01/21
 REM add attach query file
-echo. >> %M1_LOG%
-echo. >> %M1_LOG%
+REM echo. >> %M1_LOG_WORK%
+REM echo. >> %M1_LOG_WORK%
 TYPE %M1_LOG_HEAD%	>  %M1_Swap_TMP%
-TYPE %M1_LOG%		>> %M1_Swap_TMP%
+TYPE %M1_LOG%			>> %M1_Swap_TMP%
+TYPE %M1_LOG_WORK%	>> %M1_Swap_TMP%
 TYPE %M1_Swap_TMP%	>> %M1_Swap_OK%
 echo. >  %M1_LOG%
 TYPE %M1_Swap_ok%	>> %M1_LOG%
@@ -450,21 +453,19 @@ REM ************************************************************
 
 %M1_RUNDRIVE%
 CD %M1_RUNDIR% 
-
-
-%M1_MSGDSP_EXE% '完成0030_auto_set_duty.bat' 5 
-
-net use /del %M1_TAG_DRIVE% /y 
+MSG * /TIME:3 '完成0030_auto_set_duty.bat' 5 
 ENDLOCAL
+EXIT
+
 EXIT
 REM :: :::::::::::::::::::::::::::::::::::::::::::::::::::
 REM :: 	SUB FUNCTION
 REM :: :::::::::::::::::::::::::::::::::::::::::::::::::::
 :L1_CK_FILE_ERR01
 	@echo on
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG%
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG%	
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG%
+	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG_WORK%
+	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG_WORK%
+	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG_WORK%
 	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  
 	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  
 	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE% 
@@ -530,121 +531,142 @@ GOTO L1_start_Admin01
 ECHO sub func call 
 ::::::::::::::::::::::::::::
 :L1_ONDUTY
-echo. :::  ============================================================= 			>> %M0_LOG%  
-echo  :::  ======================上班 ==================================			>> %M1_LOG%  
-echo  :::  "0750 process"															>> %M1_LOG%  
-echo. :::  "1-0750-上班前重開機 run D:\Msg\Use\00-onduty_schedule.bat"  			>> %M1_LOG%                          
-echo. :::  ============================================================= 			>> %M1_LOG%  
-echo. :::  -----------     every thing  on ----------4 5 off	-----------			>> %M0_LOG%     
-schtasks /CHANGE /ENABLE  /TN "\0830_班\0825-記得簽到"								>> %M1_LOG%    
-schtasks /CHANGE /ENABLE  /TN "\0830_班\0900-START_HYVideoDesktop"					>> %M1_LOG% 
-schtasks /CHANGE /ENABLE  /TN "\0830_班\1-0750-上班前重開機"						>> %M1_LOG% 
-schtasks /CHANGE /ENABLE  /TN "\0830_班\1630-W-每周五_檢查備份硬碟已備妥至抽取盒"	>> %M1_LOG%
-schtasks /CHANGE /ENABLE  /TN "\0830_班\1728-1730_D-金控人資簽退"					>> %M1_LOG%  
-schtasks /CHANGE /ENABLE  /TN "\0830_班\2-0800-1829-上班期間系統開機後"				>> %M1_LOG% 
-echo. ::: "0830_班\3-1825-下班後重開機 永遠 ON" 									>> %M1_LOG% 
-echo. :::  ----------- 3 Always ON------------	---------------------				>> %M1_LOG%  
-schtasks /CHANGE /ENABLE  /TN "\0830_班\3-1825-下班後重開機"						>> %M1_LOG% 
-echo. :::  ----------- 4, 5 off	------------	---------------------				>> %M1_LOG%  
-schtasks /CHANGE /DISABLE /TN "\0830_班\4-1830-0755-下班-系統開機後"				>> %M1_LOG% 
-schtasks /CHANGE /DISABLE /TN "\0830_班\5-休假期間_0755_重開機"						>> %M1_LOG% 
-echo. :::  >> %M1_LOG%  
-echo. :::  ===============Set Up ON Alarm Schedule======================= 			>> %M0_LOG%   
-schtasks /CHANGE /ENABLE  /TN "\Alarm\D-0825"										>> %M0_LOG%    
-schtasks /CHANGE /ENABLE  /TN "\Alarm\D-0840"										>> %M0_LOG% 
-schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1030"										>> %M0_LOG%
-schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1530"										>> %M0_LOG% 
-schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1715"										>> %M0_LOG%    
-schtasks /CHANGE /ENABLE  /TN "\Alarm\T-1630"										>> %M0_LOG% 
-schtasks /CHANGE /ENABLE  /TN "\Alarm\W3-1555"										>> %M0_LOG%    
-schtasks /CHANGE /ENABLE  /TN "\Alarm\W5-1555"										>> %M0_LOG%
-echo. :::  >> %M1_LOG%  
-echo. :::  >> %M1_LOG% 
+echo. :::  ============================================================= 			>> %M1_LOG_WORK%  
+echo  :::  ======================上班 ==================================			>> %M1_LOG_WORK%  
+echo  :::  "0750 process"															>> %M1_LOG_WORK%  
+echo. :::  "1-0750-上班前重開機 run D:\Msg\Use\00-onduty_schedule.bat"  			>> %M1_LOG_WORK%                       
+echo. :::  ============================================================= 			>> %M1_LOG_WORK%  
+echo. :::  -----------     every thing  on ----------4 5 off	-----------			>> %M1_LOG_WORK%  
+schtasks /CHANGE /ENABLE  /TN "\0830_班\1-0750-上班前重開機"						>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE  /TN "\0830_班\2-0800-1829-上班期間系統開機後"				>> %M1_LOG_WORK% 
+echo. ::: "0830_班\3-1825-下班後重開機 永遠 ON" 									>> %M1_LOG_WORK% 
+echo. :::  ----------- 3 Always ON------------	---------------------				>> %M1_LOG_WORK%  
+schtasks /CHANGE /ENABLE  /TN "\0830_班\3-1825-下班後重開機"						>> %M1_LOG_WORK% 
+echo. :::  ----------- 4, 5 off	------------	---------------------				>> %M1_LOG_WORK%  
+schtasks /CHANGE /DISABLE /TN "\0830_班\4-1830-0755-下班-系統開機後"				>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\5-休假期間_0755_重開機"						>> %M1_LOG_WORK% 
+echo. :::  20210610 ADD------- WFH 1,2,3,4,5 OFF	----------------------			>> %M1_LOG_WORK% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\1-0750-上班前重開機"						>> %M1_LOG_WORK%  
+schtasks /CHANGE /DISABLE /TN "\0830_班\2-0800-1829-上班期間系統開機後"				>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\3-1825-下班後重開機"						>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\4-1830-0755-下班-系統開機後"				>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\5-休假期間_0755_重開機"						>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE /TN "\0830_班\99-0740-居家工作-上班期間-執行上班排程"		>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE /TN "\0830_班\99-1830-居家工作-執行下班後關閉排程機"		>> %M1_LOG_WORK% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M1_LOG_WORK% 
+echo. :::  ==============================================================			>> %M1_LOG_WORK% 
+echo. :::  >>  %M1_LOG_WORK% 
+echo. :::  ===============Set Up ON Alarm Schedule======================= 			>> %M1_LOG_WORK%
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-0825"										>> %M1_LOG_WORK%    
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-0840"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-0900"										>> %M1_LOG_WORK%
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1030"										>> %M1_LOG_WORK%
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1530"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1715"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1730"										>> %M1_LOG_WORK%     
+schtasks /CHANGE /ENABLE  /TN "\Alarm\T-1630"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE  /TN "\Alarm\W3-1555"										>> %M1_LOG_WORK%    
+schtasks /CHANGE /ENABLE  /TN "\Alarm\W5-1555"										>> %M1_LOG_WORK%
+echo. :::  >>  %M1_LOG_WORK% 
 echo. :::  ==========查詢目前狀態======================================== 			>> %M1_LOG% 
-echo. :::  -----------     every thing  on 	---------4 5 off  -----------			>> %M0_LOG%   
-schtasks /query /fo csv /nh /TN "\0830_班\0825-記得簽到"							>> %M1_LOG%    
-schtasks /query /fo csv /nh /TN "\0830_班\0900-START_HYVideoDesktop"				>> %M1_LOG% 
+echo. :::  -----------     every thing  on 	---------4 5 off  -----------			>> %M1_LOG%   
 schtasks /query /fo csv /nh /TN "\0830_班\1-0750-上班前重開機"						>> %M1_LOG% 
-schtasks /query /fo csv /nh /TN "\0830_班\1630-W-每周五_檢查備份硬碟已備妥至抽取盒"	>> %M1_LOG%
-schtasks /query /fo csv /nh /TN "\0830_班\1728-1730_D-金控人資簽退"					>> %M1_LOG%  
 schtasks /query /fo csv /nh /TN "\0830_班\2-0800-1829-上班期間系統開機後"			>> %M1_LOG%  
 schtasks /query /fo csv /nh /TN "\0830_班\3-1825-下班後重開機"						>> %M1_LOG% 
 echo. :::  ----------- 4, 5 off	-----------------------------------------			>> %M1_LOG%  
 schtasks /query /fo csv /nh /TN "\0830_班\4-1830-0755-下班-系統開機後"				>> %M1_LOG% 
 schtasks /query /fo csv /nh /TN "\0830_班\5-休假期間_0755_重開機"					>> %M1_LOG% 
+echo. :::  20210610 ADD------- WFH 1,2,3,4,5 OFF	----------------------			>> %M1_LOG% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\0830_班\99-0740-居家工作-上班期間-執行上班排程"	>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\0830_班\99-1830-居家工作-執行下班後關閉排程機"	>> %M1_LOG% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M1_LOG% 
 echo. :::  ==============================================================			>> %M1_LOG% 
-echo. >> %M0_LOG% 
-echo. :::  ===============QUERY set Up Alarm ON Schedule======================= 	>> %M0_LOG%   
-schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\D-0840"										>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\Alarm\D-0900"										>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\Alarm\D-1030"										>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\Alarm\D-1530"										>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\D-1715"										>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\T-1630"										>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\W3-1555"									>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\W5-1555"									>> %M0_LOG%  
-echo. :::  ============================================================= 			>> %M0_LOG% 
-echo. :::  ============================================================= 			>> %M0_LOG%  
+echo. >> %M1_LOG% 
+echo. :::  ===============QUERY set Up Alarm ON Schedule======================= 	>> %M1_LOG%   
+schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-0840"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-0900"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-1030"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-1530"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-1715"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-1730"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\T-1630"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\W3-1555"									>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\W5-1555"									>> %M1_LOG%  
+echo. :::  ============================================================= 			>> %M1_LOG% 
+echo. :::  ============================================================= 			>> %M1_LOG%  
  
 GOTO L1_CHECK_STEP_END
 
 
 :L1_OFFDUTY
-echo. :::  ============================================================= 			>> %M0_LOG%  
-echo  :::  ======================休假 ==================================			>> %M1_LOG%  
-echo. :::  "1825 process"															>> %M1_LOG%  
-echo. :::  "3-1825-下班後重開機 run D:\Msg\Use\00-offduty_schedule.bat"   			>> %M1_LOG%                                                         
-echo. :::  ============================================================= 			>> %M1_LOG%   
-echo. :::  -----------     every thing  off-----------3,4,5 on	-----------			>> %M1_LOG% 
-schtasks /CHANGE /DISABLE /TN "\0830_班\0825-記得簽到"								>> %M1_LOG%    
-schtasks /CHANGE /DISABLE /TN "\0830_班\0900-START_HYVideoDesktop"					>> %M1_LOG% 
-schtasks /CHANGE /DISABLE /TN "\0830_班\1-0750-上班前重開機"						>> %M1_LOG% 
-schtasks /CHANGE /DISABLE /TN "\0830_班\1630-W-每周五_檢查備份硬碟已備妥至抽取盒"	>> %M1_LOG%
-schtasks /CHANGE /DISABLE /TN "\0830_班\1728-1730_D-金控人資簽退"					>> %M1_LOG%  
-schtasks /CHANGE /DISABLE /TN "\0830_班\2-0800-1829-上班期間系統開機後"				>> %M1_LOG% 
-echo. ::: "0830_班\3-1825-下班後重開機 永遠 ON "									>> %M1_LOG% 
-echo. :::  ----------- 3 Always ON------------	---------------------				>> %M1_LOG%  
-schtasks /CHANGE /ENABLE  /TN "\0830_班\3-1825-下班後重開機"						>> %M1_LOG% 
-echo. :::  ----------- 4,5 ON	------------	-------------------------			>> %M1_LOG%  
-schtasks /CHANGE /ENABLE /TN "\0830_班\4-1830-0755-下班-系統開機後"					>> %M1_LOG% 
-schtasks /CHANGE /ENABLE /TN "\0830_班\5-休假期間_0755_重開機"						>> %M1_LOG% 
-echo. :::  ============================================================= 			>> %M1_LOG% 
-echo. :::  >> %M1_LOG% 
-echo. :::  ===============Set Up Off Alarm Schedule======================= 			>> %M0_LOG%   
-schtasks /CHANGE /DISABLE /TN "\Alarm\D-0825"										>> %M0_LOG%    
-schtasks /CHANGE /DISABLE /TN "\Alarm\D-0840"										>> %M0_LOG% 
-schtasks /CHANGE /DISABLE /TN "\Alarm\D-0900"										>> %M0_LOG% 
-schtasks /CHANGE /DISABLE /TN "\Alarm\D-1030"										>> %M0_LOG%
-schtasks /CHANGE /DISABLE /TN "\Alarm\D-1530"										>> %M0_LOG% 
-schtasks /CHANGE /DISABLE /TN "\Alarm\D-1715"										>> %M0_LOG%    
-schtasks /CHANGE /DISABLE /TN "\Alarm\T-1630"										>> %M0_LOG% 
-schtasks /CHANGE /DISABLE /TN "\Alarm\W3-1555"										>> %M0_LOG%    
-schtasks /CHANGE /DISABLE /TN "\Alarm\W5-1555"										>> %M0_LOG%
-echo. :::  >> %M1_LOG%  
-echo. :::  >> %M1_LOG% 
-echo. :::  ==========查詢目前狀態======================================== 			>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\0830_班\0825-記得簽到"							>> %M1_LOG%    
-schtasks /query /fo csv /nh /TN "\0830_班\0900-START_HYVideoDesktop"				>> %M1_LOG% 
+echo. :::  ============================================================= 			>> %M1_LOG_WORK% 
+echo  :::  ======================休假 ==================================			>> %M1_LOG_WORK%
+echo. :::  "1825 process"															>> %M1_LOG_WORK%
+echo. :::  "AS RUN 3-1825-下班後重開機 run D:\Msg\Use\00-offduty_schedule.bat"   	>> %M1_LOG_WORK%                                                   
+echo. :::  ============================================================= 			>> %M1_LOG_WORK%
+echo. :::  -----------     every thing  off-----------3,4,5 on	-----------			>> %M1_LOG_WORK%
+schtasks /CHANGE /DISABLE /TN "\0830_班\1-0750-上班前重開機"						>> %M1_LOG_WORK%
+schtasks /CHANGE /DISABLE /TN "\0830_班\2-0800-1829-上班期間系統開機後"				>> %M1_LOG_WORK% 
+echo. ::: "0830_班\3-1825-下班後重開機 永遠 ON "									>> %M1_LOG_WORK% 
+echo. :::  ----------- 3 Always ON---------------------------------					>> %M1_LOG_WORK%  
+schtasks /CHANGE /ENABLE  /TN "\0830_班\3-1825-下班後重開機"						>> %M1_LOG_WORK% 
+echo. :::  ----------- 4,5 ON	------------	-------------------------			>> %M1_LOG_WORK%  
+schtasks /CHANGE /ENABLE /TN "\0830_班\4-1830-0755-下班-系統開機後"					>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE /TN "\0830_班\5-休假期間_0755_重開機"						>> %M1_LOG_WORK% 
+
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\1-0750-上班前重開機"						>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\2-0800-1829-上班期間系統開機後"				>> %M1_LOG_WORK%
+schtasks /CHANGE /DISABLE /TN "\0830_班\3-1825-下班後重開機"						>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\0830_班\4-1830-0755-下班-系統開機後"				>> %M1_LOG_WORK%
+schtasks /CHANGE /DISABLE /TN "\0830_班\5-休假期間_0755_重開機"						>> %M1_LOG_WORK%
+schtasks /CHANGE /DISABLE /TN "\0830_班\99-0740-居家工作-上班期間-執行上班排程"		>> %M1_LOG_WORK%
+schtasks /CHANGE /DISABLE /TN "\0830_班\99-1830-居家工作-執行下班後關閉排程機"		>> %M1_LOG_WORK%
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M1_LOG_WORK%
+echo. :::  ============================================================= 			>> %M1_LOG_WORK% 
+echo. :::  >> %M1_LOG_WORK% 
+echo. :::  ===============Set Up Off Alarm Schedule======================= 			>> %M1_LOG_WORK%  
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-0825"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-0840"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-0900"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-1030"										>> %M1_LOG_WORK%
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-1530"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-1715"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-1730"										>> %M1_LOG_WORK%    
+schtasks /CHANGE /DISABLE /TN "\Alarm\T-1630"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\W3-1555"										>> %M1_LOG_WORK%    
+schtasks /CHANGE /DISABLE /TN "\Alarm\W5-1555"										>> %M1_LOG_WORK%
+
+echo. :::  >> %M1_LOG_WORK% 
+echo. :::  ==========查詢目前狀態======================================== 			>> %M1_LOG% 
 schtasks /query /fo csv /nh /TN "\0830_班\1-0750-上班前重開機"						>> %M1_LOG% 
-schtasks /query /fo csv /nh /TN "\0830_班\1630-W-每周五_檢查備份硬碟已備妥至抽取盒"	>> %M1_LOG%
-schtasks /query /fo csv /nh /TN "\0830_班\1728-1730_D-金控人資簽退"					>> %M1_LOG%  
 schtasks /query /fo csv /nh /TN "\0830_班\2-0800-1829-上班期間系統開機後"			>> %M1_LOG%  
 schtasks /query /fo csv /nh /TN "\0830_班\3-1825-下班後重開機"						>> %M1_LOG% 
 schtasks /query /fo csv /nh /TN "\0830_班\4-1830-0755-下班-系統開機後"				>> %M1_LOG% 
 schtasks /query /fo csv /nh /TN "\0830_班\5-休假期間_0755_重開機"					>> %M1_LOG% 
+echo. :::  20210610 ADD------- WFH 1,2,3,4,5 OFF	----------------------			>> %M1_LOG% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\0830_班\99-0740-居家工作-上班期間-執行上班排程"	>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\0830_班\99-1830-居家工作-執行下班後關閉排程機"	>> %M1_LOG% 
+echo. :::  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@			>> %M1_LOG% 
 echo. :::  >> %M1_LOG%  
-echo. :::  ===============QUERY set Up Alarm OFF Schedule======================= 	>> %M0_LOG%   
-schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\D-0840"										>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\Alarm\D-1030"										>> %M0_LOG% 
-schtasks /query /fo csv /nh /TN "\Alarm\D-1530"										>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\D-1715"										>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\T-1630"										>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\W3-1555"									>> %M0_LOG%
-schtasks /query /fo csv /nh /TN "\Alarm\W5-1555"									>> %M0_LOG%  
-echo. :::  ============================================================= 			>> %M0_LOG% 
-echo. :::  ============================================================= 			>> %M0_LOG%  
+echo. :::  ===============QUERY set Up Alarm OFF Schedule======================= 	>> %M1_LOG%   
+schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-0840"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-0900"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-1030"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-1530"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-1715"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-1730"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\T-1630"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\W3-1555"									>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\W5-1555"									>> %M1_LOG%  
+echo. :::  ============================================================= 			>> %M1_LOG% 
+echo. :::  ============================================================= 			>> %M1_LOG%  
+
 GOTO L1_CHECK_STEP_END
 
 
