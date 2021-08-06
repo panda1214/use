@@ -60,6 +60,8 @@ REM **********************************************
 	"C:\WINDOWS\system32\taskkill.exe" /F /IM Rainmeter.exe /T 	
 	"C:\WINDOWS\system32\taskkill.exe" /F /IM lync.exe /T 	
 	"C:\WINDOWS\system32\taskkill.exe" /F /IM caffeine64.exe /T 
+	"C:\WINDOWS\system32\taskkill.exe" /F /IM lync.exe /T 
+    "C:\WINDOWS\system32\taskkill.exe" /F /IM caffeine64.exe /T 
 	
 	nircmd cmdwait 1000 win setsize ititle "cmd.exe" 3600 3600 100 200
 	mode con cols=20 lines=10

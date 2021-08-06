@@ -26,10 +26,10 @@ while (true) {
 	
 	
 		<h1>
-		<font size="10" color="#00F0F0" <p style="font-family: verdana">
-			<p>    (1)整理工作，寫好工作日誌 </P>
-			<p>    (2)清空水杯，重整心情，收拾背包</P>
-			<p>    (3)下班記得打卡，準備離開 </P>
+		<font size="10" color="#00F0F0" style="font-family: verdana">
+			<p align=Left>(1)整理工作，寫好工作日誌 </P>
+			<p align=left>(2)清空水杯，重整心情，收拾背包</P>
+			<p align=left>(3)下班記得打卡，準備離開 </P>
 		</font>
 		</h1>
 		

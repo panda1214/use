@@ -71,11 +71,12 @@ while (true) {
 	
 		<CENTER>
 		<h1>
-		<font size="7" color="#00F0F0" <p style="font-family: verdana">
-			<p> 記得進入人資系統，簽到或簽退 </P>
-			<p>  						   </P>
-			<p> 記得進入人資系統，簽到或簽退 </P>
-			<p>  						   </P>	
+		<font size="7" color="#00F0F0" style="font-family: verdana">
+			<p>  						 				 </P>	
+			<p align=center>記得進入人資系統，簽到或簽退 </P>
+			<p>  						  				 </P>
+			<p align=center>記得進入人資系統，簽到或簽退 </P>
+			<p>  										 </P>	
 		</font>
 		</h1>
 		<h2>	

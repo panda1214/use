@@ -76,11 +76,11 @@ while (true) {
 	
 	
 		<h1>
-		<font size="7" color="#00F0F0" <p style="font-family: verdana">
-			<p> (1)準備備份 d:\程式_ _硬碟資料	</P>
-			<p>  						  </P>
-			<p> (2)將抽取電源打開準備備份 </P>
-			<p>  						  </P>	
+		<font size="7" color="#00F0F0" style="font-family: verdana">
+			<p align=Left>(1)準備備份 d:\程式_ _硬碟資料	</P>
+			<p>  						                    </P>
+			<p align=Left>(2)將抽取電源打開準備備份         </P>
+			<p>  						                    </P>	
 		</font>
 		</h1>
 		

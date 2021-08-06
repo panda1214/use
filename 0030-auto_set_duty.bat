@@ -562,7 +562,9 @@ schtasks /CHANGE /ENABLE  /TN "\Alarm\D-0825"										>> %M1_LOG_WORK%
 schtasks /CHANGE /ENABLE  /TN "\Alarm\D-0840"										>> %M1_LOG_WORK% 
 schtasks /CHANGE /ENABLE  /TN "\Alarm\D-0900"										>> %M1_LOG_WORK%
 schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1030"										>> %M1_LOG_WORK%
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1405"										>> %M1_LOG_WORK% 
 schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1530"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1705"										>> %M1_LOG_WORK% 
 schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1715"										>> %M1_LOG_WORK% 
 schtasks /CHANGE /ENABLE  /TN "\Alarm\D-1730"										>> %M1_LOG_WORK%     
 schtasks /CHANGE /ENABLE  /TN "\Alarm\T-1630"										>> %M1_LOG_WORK% 
@@ -589,7 +591,9 @@ schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-0840"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-0900"										>> %M1_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-1030"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-1405"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-1530"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-1705"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-1715"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-1730"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\T-1630"										>> %M1_LOG%
@@ -633,7 +637,9 @@ schtasks /CHANGE /DISABLE /TN "\Alarm\D-0825"										>> %M1_LOG_WORK%
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-0840"										>> %M1_LOG_WORK% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-0900"										>> %M1_LOG_WORK% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1030"										>> %M1_LOG_WORK%
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-1405"										>> %M1_LOG_WORK% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1530"										>> %M1_LOG_WORK% 
+schtasks /CHANGE /DISABLE /TN "\Alarm\D-1705"										>> %M1_LOG_WORK%
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1715"										>> %M1_LOG_WORK% 
 schtasks /CHANGE /DISABLE /TN "\Alarm\D-1730"										>> %M1_LOG_WORK%    
 schtasks /CHANGE /DISABLE /TN "\Alarm\T-1630"										>> %M1_LOG_WORK% 
@@ -658,7 +664,9 @@ schtasks /query /fo csv /nh /TN "\Alarm\D-0825"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-0840"										>> %M1_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-0900"										>> %M1_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-1030"										>> %M1_LOG% 
+schtasks /query /fo csv /nh /TN "\Alarm\D-1405"										>> %M1_LOG% 
 schtasks /query /fo csv /nh /TN "\Alarm\D-1530"										>> %M1_LOG%
+schtasks /query /fo csv /nh /TN "\Alarm\D-1705"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-1715"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\D-1730"										>> %M1_LOG%
 schtasks /query /fo csv /nh /TN "\Alarm\T-1630"										>> %M1_LOG%

@@ -14,7 +14,7 @@ exit /b
 <script type="text/javascript">
 while (true) {
     try {
-	var w = 920, h = 700;
+	var w = 920, h = 500;
         window.resizeTo(w, h);
         window.moveTo((window.screen.width - w) / 2, (window.screen.height - h) / 2);
         break;
@@ -26,11 +26,11 @@ while (true) {
 	
 	
 		<h1>
-		<font size="7" color="#00F0F0" <p style="font-family: verdana">
-			<br> 回覆:大雄在CTeam 上建立的問卷調查 </br>
-			<p>  						           </p>
-			<p> 防疫調查投票了沒，防疫調查投票了沒 </p>
-			<br>  						           </br>
+		<font size="7" color="#00F0F0" style="font-family: verdana">
+			<p align=left>回覆:大雄在CTeam 上建立的問卷調查 	</p>
+			<p>  						          				</p>
+			<p align=left>防疫調查投票了沒，防疫調查投票了沒	</p>
+			<p>  						      			    	</p>
 		</font>
 		</h1>
 		
@@ -67,7 +67,11 @@ style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:bl
 <p> [ 如未按下 "貪睡"，來休眠接收訊息， <span id="timer"></span>秒，後自動離開並結束程式!!!]  </p>
 </center>
 
-
+<object type="audio/x-wav" data="D:\Msg\Use\Alarm\台灣阿龍.mp3" width="320" height="260">
+<param name="autostart" value="true" />
+<param name="controller" value="true" />
+<param name="src" value="D:\Msg\Use\Alarm\台灣阿龍.mp3">
+</object>
 
 
 
@@ -108,7 +112,7 @@ function timer()
 	button_manual=0;
 	 while (true) {
 		try {
-		var w = 920, h = 700;
+		var w = 900, h = 520;
 			window.resizeTo(w, h);
 			window.moveTo((window.screen.width - w) / 2, (window.screen.height - h) / 2);
 			break;

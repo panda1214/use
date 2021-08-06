@@ -26,11 +26,11 @@ while (true) {
 	
 	
 		<h1>
-		<font size="7" color="#00F0F0" <p style="font-family: verdana">
-			<p> 下周一(明日上班)，有排休嗎?  </P>
-			<p>  						     </P>
-			<p> (1)重新設定鬧鐘，排程    	 </P>
-			<p> (2)寄出 EMAIL 提醒職代及主管 </P>	
+		<font size="7" color="#00F0F0" style="font-family: verdana">
+			<p align=Left>下周一(明日上班)，有排休嗎?  </P>
+			<p>  						               </P>
+			<p align=Left>(1)重新設定鬧鐘，排程    	   </P>
+			<p align=Left>(2)寄出 EMAIL 提醒職代及主管 </P>	
 		</font>
 		</h1>
 		

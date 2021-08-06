@@ -13,7 +13,7 @@ START nircmd.exe setsysvolume 65535
 
 C:
 CD "C:\Program Files\Microsoft Office\Office16"
-START /min OUTLOOK.EXE
+START OUTLOOK.EXE
 
 C:
 CD "C:\Program Files\Microsoft Office\Office15\"
@@ -31,7 +31,7 @@ START caffeine64.exe
 REM ::: ╬xда :::
 C:
 CD "C:\Program Files (x86)\FreeAlarmClock\"
-START /min  FreeAlarmClock.exe
+START FreeAlarmClock.exe
 
 timeout /t 60
 C:

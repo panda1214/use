@@ -27,10 +27,10 @@ while (true) {
 	
 		<h1>
 		<font size="7" color="#00F0F0" <p style="font-family: verdana">
-			<p> 親愛的同仁，已經工作一段時間</P>
-			<p>  						     </P>
-			<p> 起來動一動，做一下暖身運動 	 </P>
-			<p> 喝杯水，休息一下，工作更有勁 </P>	
+			<p align=left>親愛的同仁，已經工作一段時間 </P>
+			<p>  						  			   </p>
+			<p align=left>起來動一動，做一下暖身運動   </P>
+			<p align=left>喝杯水，休息一下，工作更有勁 </P>	
 		</font>
 		</h1>
 		
@@ -66,6 +66,13 @@ style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:bl
 <font size="3" color="#FF0DFF" "font-family: verdana" ;>
 <p> [ 如未按下 "貪睡"，來休眠接收訊息， <span id="timer"></span>秒，後自動離開並結束程式!!!]  </p>
 </center>
+
+<object type="audio/x-wav" data="D:\Msg\Use\台灣阿龍.mp3" width="320" height="260">
+<param name="autostart" value="true" />
+<param name="controller" value="true" />
+<param name="src" value="D:\Msg\Use\台灣阿龍.mp3">
+</object>
+
 
 
 
