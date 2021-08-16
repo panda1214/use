@@ -23,6 +23,10 @@ C:
 CD "C:\Program Files\Rainmeter\"
 START  Rainmeter.exe
 
+C:
+cd "C:\Program Files (x86)\Rainlndar"
+:::START /min Rainlendar2.exe
+
 REM ::: 軟體每隔一段時間模擬鍵盤操作，進而避免關機 :::
 D:
 CD "D:\Win10_64_APP\caffeine(軟體每隔一段時間模擬鍵盤操作，進而避免關機)\"
@@ -31,12 +35,10 @@ START caffeine64.exe
 REM ::: 鬧鐘 :::
 C:
 CD "C:\Program Files (x86)\FreeAlarmClock\"
-START FreeAlarmClock.exe
+:::20210810 mark :::REM START FreeAlarmClock.exe
 
 timeout /t 60
-C:
-cd "C:\Program Files (x86)\Rainlndar"
-START /min Rainlendar2.exe
+
 
 REM *******************************************
 REM	SHOW Message

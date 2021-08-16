@@ -1,0 +1,32 @@
+<!-- :	Running cmd from HTA file
+-->		
+<html>
+<head>
+<title>HTA Test</title>
+<HTA:APPLICATION 
+ ID="objTest" 
+ APPLICATIONNAME="HTA Test"
+ SCROLL="no"
+ SINGLEINSTANCE="yes"
+>
+</head>
+
+<SCRIPT LANGUAGE="VBScript">
+Sub TestSub
+	Dim Shell
+	Set Shell = WScript.CreateObject ("WScript.Shell")
+	Shell.run WScript "cmd /g applStart.sh SetTime.dat Year.Value-Month.Value-Day.Value-          Hour.Value-Minute.Value-Second.Value"
+	Set Shell = Nothing
+End Sub
+</SCRIPT>
+<body>
+ Type in the date you want to jump to:</br>
+
+<input type="number" name="Day" size="2">
+<input type="number" name="Month" size="2">
+<input type="number" name="Year" size="4">
+<input type="number" name="Hour" size="2">
+<input type="number" name="Minute" size="2">
+<input type="number" name="Second" size="2">
+
+<input id=runbutton  type="button" value="Run Script" name="run_button"   onClick="TestSub">

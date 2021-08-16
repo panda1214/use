@@ -229,7 +229,7 @@ echo. 琩高盞絏岿粇	ERROR ERROR	ERROR					>> %M0_LOG%
 echo. тぃ盞絏琩高郎  %M0_TAGFIL1%						>> %M0_LOG%
 echo. **************************************************	>> %M0_LOG%
 SET M0_MSG_CHT_STR="[***ERROR***]_[%M0_LOGON_USER%]盞絏琩高岿粇,тぃ盞絏琩高郎[ %M0_TAGFIL1%]-[FM-%M0_SENDIP%]"
-SET M0_MSG_ENG_STR=[***ERROR***]Query_Stuff[%M0_LOGON_USER%]Password_EndDate_ERROR_CANNOT_FIND_Password_Query_File[%M0_TAG_Drive%]-[FM-%M0_SENDIP%]
+SET M0_MSG_ENG_STR=[***ERROR***]Query_Stuff[%M0_LOGON_USER%]Password_EndDate_ERROR_CANNOT_FIND_Password_Query_File[%M0_TAGFIL1%]-[FM-%M0_SENDIP%]
 SET M0_MSG_ICON=16
 SET M0_event=err_msg
 GOTO L0_SENDMSG1
@@ -277,7 +277,7 @@ REM ************************************************************
 REM L0_EXIT_OUT
 REM ************************************************************
 :L0_EXIT_OUT
-net use /del %M0_TAG_DRIVE% /y 
+del %tmp%\tmp.vbs
 ENDLOCAL
 EXIT
 

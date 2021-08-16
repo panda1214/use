@@ -66,7 +66,7 @@ style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:bl
 <p> 
 <object type="audio/x-wav" data="D:\Msg\Use\¥xÆWªüÀs.mp3" width="0" height="0">
 <param name="autostart" value="true" />
-<!-- : <param name="loop" value="true" /> -->
+<param name="loop" value="true" /> 
 <param name="src" value="D:\Msg\Use\¥xÆWªüÀs.mp3">
 </object>
 
@@ -96,7 +96,7 @@ datnow.innerHTML="°T®§°e¥X®É¶¡: "+new Date().toLocaleString()+' ¬P´Á'+'¤é¤@¤G¤T¥
 
 button_manual=0;
 <!-- : ²Ä1¦¸Call Function ¡A 300¬íµ²§ô  -->
-count=900; // seconds 
+count=300; // seconds 
 
 <!-- :   REMÅã¥Ü¤º®e¦¸¼ÆREM  count=1¬í1¦¸  -->
 counter=setInterval(timer, 1000); 
@@ -112,7 +112,7 @@ function timer()
 	{
 	}	
 	<!-- :   ¤w¸g«ö¹L³gºÎ¤@¦¸ (1) Windows ÁY¤p©Î®ø¥¢ (2) µ¥«ÝmySLEEP (3)­«·sRESET­p®É300¬íµ²§ô  -->
-	count=900; // seconds  
+	count=300; // seconds  
 	button_manual=0;
 	 while (true) {
 		try {
@@ -140,6 +140,13 @@ function mySLEEP() {
 	count=540; // seconds 
     window.resizeTo(0, 0);
 	window.moveTo(3600 ,3600);
+	
+	<object type="audio/x-wav" data="D:\Msg\Use\¥xÆWªüÀs.mp3" width="0" height="0">
+	<param name="mute" value="0">  <!--¬O§_ÀR­µ--> 
+	<param name="src" value="D:\Msg\Use\¥xÆWªüÀs.mp3">
+	</object>
+
+	
 	return;
 }
 </script>

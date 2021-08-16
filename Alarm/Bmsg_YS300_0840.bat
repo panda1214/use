@@ -63,15 +63,16 @@ style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:bl
 <input type="button" value="貪睡(9分)" onclick="mySLEEP()"
 style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:blue;">
 
+<p> 
+<object type="audio/x-wav" data="D:\Msg\Use\台灣阿龍.mp3" width="0" height="0">
+<param name="autostart" value="true" />
+<!-- :  <param name="loop" value="true" />    --> 
+<param name="src" value="D:\Msg\Use\台灣阿龍.mp3">
+</object>
+
 <font size="3" color="#FF0DFF" "font-family: verdana" ;>
 <p> [ 如未按下 "貪睡"，來休眠接收訊息， <span id="timer"></span>秒，後自動離開並結束程式!!!]  </p>
 </center>
-
-<object type="audio/x-wav" data="D:\Msg\Use\Alarm\台灣阿龍.mp3" width="320" height="260">
-<param name="autostart" value="true" />
-<param name="controller" value="true" />
-<param name="src" value="D:\Msg\Use\Alarm\台灣阿龍.mp3">
-</object>
 
 
 

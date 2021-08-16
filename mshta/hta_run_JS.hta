@@ -1,0 +1,101 @@
+<--! VBS script in HTA  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tombstone USD #1 - Software Installer</title>
+
+    <HTA:APPLICATION
+        APPLICATIONNAME = "Software Installer"
+        ICON = "images\districtlogo.ico"
+        ID = "NAME"
+        BORDER = "thick"        
+        CAPTION = "yes"
+        SHOWINTASKBAR = "yes"
+        SINGLEINSTANCE = "yes"
+        SYSMENU = "yes"
+        WINDOWSTATE="normal"
+        SCROLL = "no"
+        VERSION = "1.0"
+        INNERBORDER = "yes"
+        SELECTION = "yes"
+        MAXIMIZEBUTTON = "no"
+        MINIMIZEBUTTON = "no"
+        NAVIGABLE = "no"
+        CONTEXTMENU = "yes"
+        BORDERSTYLE = "normal"
+    />
+
+    <script type="text/javascript">
+    <!--Resolution//-->
+        window.resizeTo(600,750);
+    </script>
+
+    <script language="VBScript">
+        Sub Start_Button()
+
+            Dim strAnswer,strPath, wshShell,TheForm
+            Set wshShell = CreateObject("wscript.shell")           
+            Set TheForm = Document.MainMenu
+            strAnswer = ""
+            strPath = ""
+            
+		    If TheForm.chkEset.Checked Then strAnswer = "Eset"            
+
+           'If strPath is empty then nothing was checked.
+            If TheForm.strPath = "" Then 
+                Window.Alert "Please input Path location!"   
+            End If
+            
+		    'If strAnswer is empty then nothing was checked.
+		    If strAnswer = "" Then 
+		        Window.Alert "Please Make an Selection!"
+		        Exit Sub
+		    End If
+
+			Command_3H = Chr(34) & TheForm.strPath & "\Programs\ESet Rip and Replace.exe" & Chr(34)
+
+			If TheForm.chkEset.Checked Then
+				wshShell.Run(Command_3H)
+			On Error Resume Next 	
+			End If
+			
+            Window.Alert "Done!"
+        End Sub
+    </script>   
+
+</head>
+
+<body style="background-color:#E6E6FA">
+    <center>
+        <img src="images\districtlogo.png" alt="Logo" height="100" width="100"/>
+        <h1>Software Installer</h1>
+    </center>
+
+    <form name="MainMenu" action="" method="">
+<table style="width:100%">
+			<tr>
+				<td colspan="2"><label for="Path">Drive Letter or File Path:</label></td>
+				<td colspan="4"><input type="text" size="60" id="Path" name="strPath"></td>
+			</tr>
+			<tr>
+				<td colspan="6"><br /></td>
+			</tr>
+			<tr>
+				<th colspan="6">Security</th>
+			</tr>
+			<tr>
+				<td><label for="Eset">ESet AntiVirus</label></td>
+				<td><input type="checkbox" id="Eset" value= "Eset" name="chkEset"></td>
+			</tr>
+			<tr>
+				<td colspan="6"><br /></td>
+			</tr>
+			<tr>
+				<td colspan="6" align="center"><input type="button" name="btnStart" id="btnStart" value="Start" onclick="Start_Button()"><input type="reset" value="Reset"></td>
+		</table>
+
+    </form>
+
+</body>
+
+</html>

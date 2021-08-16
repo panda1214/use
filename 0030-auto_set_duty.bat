@@ -31,16 +31,10 @@ GOTO L1_start_Admin
 REM 底下為IFTTT轉Line金鑰
 REM curl -X POST -H "Content-Type: application/json" -d 
 REM '{"value1":"J"}' https://maker.ifttt.com/trigger/{event}/with/key/dtLi4Ps62eMFj8FFCUGzCw
-REM today   & Update M1_TAGFILE day **0 =today
-echo wscript.echo dateadd("d",0,date) >%tmp%\tmp.vbs
-for /f "tokens=1,2,3 delims=/- " %%i in ('cscript /nologo %tmp%\tmp.vbs') do set sx=%%i
-for /f "tokens=1,2,3 delims=/- " %%i in ('cscript /nologo %tmp%\tmp.vbs') do set sy=%%j
-for /f "tokens=1,2,3 delims=/- " %%i in ('cscript /nologo %tmp%\tmp.vbs') do set sz=%%k
-if %sy% LSS 10 set sy=0%sy%
-if %sz% LSS 10 set sz=0%sz%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::VB SCRIPE version
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::VB SCRIPE version
 REM today   & Update M1_TAGFILE day **+1 =tommorrow 
+REM today   & Update M1_TAGFILE day **0 =today
 echo wscript.echo dateadd("d",0,date) >%tmp%\tmp.vbs
 for /f "tokens=1,2,3 delims=/- " %%i in ('cscript /nologo %tmp%\tmp.vbs') do set ex=%%i
 for /f "tokens=1,2,3 delims=/- " %%i in ('cscript /nologo %tmp%\tmp.vbs') do set y=%%j
@@ -50,7 +44,7 @@ set/A  x= %ex%
 if %y% LSS 10 set y=0%y%
 if %z% LSS 10 set z=0%z%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::VB SCRIPE version
-
+del %tmp%\tmp.vbs
 ::timeout /t 3600
 
 REM *************************************
@@ -58,7 +52,6 @@ REM 董國安 FIND 讀入holiday.dat 將裡面存入 假日找出來
 REM ************************************
 REM ===================================================================================
 REM 設定程式所有變數
-SET M1_MSGDSP_EXE=msg_str_sec_bye.eee
 SET M1_TAG_WRK_FIL1=D:\msg\use\workday.dat
 SET M1_TAG_HOL_FIL1=D:\msg\use\holiday.dat
 set M1_SYSTEM_DATE=%sx%-%sy%-%sz%
@@ -120,10 +113,6 @@ SET M1_Swap_OK=%M1_LOGDIR%\0030-AUTO_SET_DUTY_LOG_OK.txt
 REM 最後一次離開時把LOG寫在前面, 後面再加上原 M1_LOG
 
 
-
-IF NOT EXIST %M1_RUNDIR%\%M1_MSGDSP_EXE% GOTO L1_CK_FILE_ERR01
-:L1_END_CK_FILE_ERR01
-REM %M1_MSGDSP_EXE% 執行0030_auto_set_duty.bat 5  
 
 
 ::::::::::::::::::::::::::::
@@ -295,6 +284,7 @@ for /f "tokens=1 delims= " %%a in ('cscript /nologo %tmp%\tmp1.vbs') do (
   SET M1_WEEKEND=%%a 
   )
 
+del %tmp%\tmp1.vbs
 IF %M1_WEEK_D% EQU 週六 GOTO L1_STEP03_DAY67
 IF %M1_WEEK_D% EQU 週日 GOTO L1_STEP03_DAY67
 ::REM IF %M1_FIND_DATE% NEQ (週六,週日, =1-5) GOTO L1_STEP03_NO
@@ -454,23 +444,14 @@ REM ************************************************************
 %M1_RUNDRIVE%
 CD %M1_RUNDIR% 
 MSG * /TIME:3 '完成0030_auto_set_duty.bat' 5 
+
 ENDLOCAL
+del %tmp%\tmp.vbs
+del %tmp%\tmp1.vbs
 EXIT
 
 EXIT
-REM :: :::::::::::::::::::::::::::::::::::::::::::::::::::
-REM :: 	SUB FUNCTION
-REM :: :::::::::::::::::::::::::::::::::::::::::::::::::::
-:L1_CK_FILE_ERR01
-	@echo on
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG_WORK%
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG_WORK%
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  >> %M1_LOG_WORK%
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE%  
-	echo  *** 找不到   %M1_RUNDIR%\%M1_MSGDSP_EXE% 
-	timeout /t 300
-GOTO L1_END_CK_FILE_ERR01
+
 
 
 

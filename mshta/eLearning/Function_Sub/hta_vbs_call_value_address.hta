@@ -1,0 +1,37 @@
+<!-- :副程式名稱後面括號裡面可以有參數(邏輯設定，Parameter)，用來設定傳遞引數(實質資料，Argument)類型，傳遞資料的方式有傳值與傳參照兩種：
+-->
+<html>
+  <script language="vbscript">
+    Function SubProg0001(ByVal Param1, ByVal Param2) '傳值
+
+      Param1 = 1234
+      Param2 = 12345
+      SubProg0001 = Param1 + Param2
+    
+    End Function
+
+    Function SubProg0002(ByRef Param1, ByRef Param2) '傳參照
+
+      Param1 = 1234
+      Param2 = 12345
+      SubProg0002 = Param1 + Param2
+    
+    End Function
+  </script>
+  <head>
+    <title>SVBR</title>
+  </head>
+  <body>
+    <script>
+      Dim A, B
+    
+      A = 12
+      B = 123
+      Document.Write "A=" & A & ",B=" & B & "<br/>"
+      Document.Write "" & SubProg0001(A, B) & "<br/>"
+      Document.Write "A=" & A & ",B=" & B & "<br/>"
+      Document.Write "" & SubProg0002(A, B) & "<br/>"
+      Document.Write "A=" & A & ",B=" & B & "<br/>"
+    </script>
+  </body>
+</html>

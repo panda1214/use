@@ -1,4 +1,5 @@
 <!-- :
+:L1_MAIN_START
 @echo off
 
 nircmd cmdwait 1000 win setsize ititle "cmd.exe" 3600 3600 100 200
@@ -43,11 +44,14 @@ if errorlevel 2 (
 	
 
 :L1_EXIT
-exit
+
+exit 
 
 :L1_CHECK_BACKUP_DRIVE
 	msg /time:60 "%username%" "異常!!!  因為抽取硬碟未準備好故未執行任何後續作業!!!"
-GOTO L1_EXIT	
+	timeout /60
+GOTO L1_EXIT
+
 	
 
 
@@ -115,6 +119,14 @@ style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:bl
 
 <input type="button" value="取消(不處理)" onclick="myCANCEL()" 
 style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:blue;">
+
+<!-- :  auto replay mp3 -->
+<p> 
+<object type="audio/x-wav" data="D:\Msg\Use\台灣阿龍.mp3" width="0" height="0">
+<param name="autostart" value="true" />
+<!-- : <param name="loop" value="true" /> -->
+<param name="src" value="D:\Msg\Use\台灣阿龍.mp3">
+</object>
 
 
 <font size="3" color="#FF0DFF" "font-family: verdana" ;>

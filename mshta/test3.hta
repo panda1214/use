@@ -1,0 +1,13 @@
+<span>File exists? </span>
+<SCRIPT>
+    function get_error(x){
+        document.getElementsByTagName('span')[0].innerHTML+=x+" does not exist.";
+    }
+    url="e:/aaa.txt";
+    url+="?"+new Date().getTime()+Math.floor(Math.random()*1000000);
+    var el=document.createElement('script');
+    el.id="123";
+    el.onerror=function(){if(el.onerror)get_error(this.id)}
+    el.src=url;
+    document.body.appendChild(el);
+</SCRIPT>

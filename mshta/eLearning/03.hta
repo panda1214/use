@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>SVBR</title>
+  </head>
+  <script language="VBScript">
+    Sub Button1_OnClick
+      Dim Apples
+      Dim Oranges
+
+      Apples = TextBox1.Value
+      Oranges = TextBox2.Value
+
+      MsgBox "你一共有" & (CInt(Apples) + CInt(Oranges)) & "個水果"
+    End Sub
+  </script>
+  <body>
+    你有蘋果幾個:<input type="text" id="TextBox1"/><p/>
+    你有柳橙幾個:<input type="text" id="TextBox2"/><p/>
+    <input type="button" id="Button1" value="Button1"/>
+  </body>
+</html>

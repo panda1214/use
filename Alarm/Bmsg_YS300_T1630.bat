@@ -63,6 +63,16 @@ style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:bl
 <input type="button" value="³gºÎ(9¤À)" onclick="mySLEEP()"
 style="width:200px;height:46px;border:5px #007cd1 double;font-size:30px;color:blue;">
 
+<!-- :  auto replay mp3 -->
+<p> 
+<object type="audio/x-wav" data="D:\Msg\Use\¥xÆWªüÀs.mp3" width="0" height="0">
+<param name="autostart" value="true" />
+<param name="src" value="D:\Msg\Use\¥xÆWªüÀs.mp3">
+</object>
+
+<!-- : <param name="loop" value="true" /> -->
+
+
 <font size="3" color="#FF0DFF" "font-family: verdana" ;>
 <p> [ ¦p¥¼«ö¤U "³gºÎ"¡A¨Ó¥ð¯v±µ¦¬°T®§¡A <span id="timer"></span>¬í¡A«á¦Û°ÊÂ÷¶}¨Ãµ²§ôµ{¦¡!!!]  </p>
 </center>
@@ -85,39 +95,39 @@ datnow.innerHTML="°T®§°e¥X®É¶¡: "+new Date().toLocaleString()+' ¬P´Á'+'¤é¤@¤G¤T¥
 
 
 <script type="text/javascript">
-
-button_manual=0;
-<!-- : ²Ä1¦¸Call Function ¡A 300¬íµ²§ô  -->
-count=300; // seconds 
-
-<!-- :   REMÅã¥Ü¤º®e¦¸¼ÆREM  count=1¬í1¦¸  -->
-counter=setInterval(timer, 1000); 
-
-function timer()
-{
- count=count-1;
- if (count <= 0)
- {
-	if ( button_manual <= 0)
-         <!-- : ¥¼«ö¤U ³gºÎ  300¬íµ²§ô  -->
-		  window.close();
-	{
-	}	
-	<!-- :   ¤w¸g«ö¹L³gºÎ¤@¦¸ (1) Windows ÁY¤p©Î®ø¥¢ (2) µ¥«ÝmySLEEP (3)­«·sRESET­p®É300¬íµ²§ô  -->
-	count=300; // seconds  
 	button_manual=0;
-	 while (true) {
-		try {
-		var w = 820, h = 600;
-			window.resizeTo(w, h);
-			window.moveTo((window.screen.width - w) / 2, (window.screen.height - h) / 2);
-			break;
-		} catch (e) { continue; }
-     }
+	<!-- : ²Ä1¦¸Call Function ¡A 300¬íµ²§ô  -->
+	count=300; // seconds 
 
- } document.getElementById("timer").innerHTML=count + " "; // 
-}
+	<!-- :   REMÅã¥Ü¤º®e¦¸¼ÆREM  count=1¬í1¦¸  -->
+	counter=setInterval(timer, 1000); 
+
+	function timer()
+	{
+	 count=count-1;
+	 if (count <= 0)
+	 {
+		if ( button_manual <= 0)
+			 <!-- : ¥¼«ö¤U ³gºÎ  300¬íµ²§ô  -->
+			  window.close();
+		{
+		}	
+		<!-- :   ¤w¸g«ö¹L³gºÎ¤@¦¸ (1) Windows ÁY¤p©Î®ø¥¢ (2) µ¥«ÝmySLEEP (3)­«·sRESET­p®É300¬íµ²§ô  -->
+		count=300; // seconds  
+		button_manual=0;
+		 while (true) {
+			try {
+			var w = 820, h = 600;
+				window.resizeTo(w, h);
+				window.moveTo((window.screen.width - w) / 2, (window.screen.height - h) / 2);
+				break;
+			} catch (e) { continue; }
+		 }
+
+	 } document.getElementById("timer").innerHTML=count + " "; // 
+	}
 </script>
+
 
 <script>
 function myEXIT() {

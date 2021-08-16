@@ -1,0 +1,1 @@
+http://www.svbr8.url.tw/Prg_Basic/Guide/VBS(HTA)/VBScript_00_00_HTA/doc.php

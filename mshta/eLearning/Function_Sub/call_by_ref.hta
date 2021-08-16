@@ -1,0 +1,27 @@
+<!-- :
+參數透過傳參照的方式傳遞陣列：
+-->
+
+
+<html>
+  <script language="vbscript">
+    Function SubProg0003(ByRef A())
+
+      SubProg0003 = A(0) + A(1) + A(2)
+
+    End Function
+  </script>
+  <head>
+    <title>SVBR</title>
+  </head>
+  <body>
+    <script>
+      Dim A(2)
+
+      A(0) = 111
+      A(1) = 222
+      A(2) = 333
+      Document.Write SubProg0003(A)
+    </script>
+  </body>
+</html>
